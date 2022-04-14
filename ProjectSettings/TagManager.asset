@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - Pickupable
   - PlaceSpace
+  - Goal
+  - Hazard
   layers:
   - Default
   - TransparentFX
