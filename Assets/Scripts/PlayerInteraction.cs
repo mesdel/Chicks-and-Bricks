@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     private Pickup currentHeld;
-    private Pickup currentNear;
+    [SerializeField]
+    private float pickUpRange;
 
     void Awake()
     {
-        currentNear = null;
         currentHeld = null;
     }
 
@@ -24,38 +24,58 @@ public class PlayerInteraction : MonoBehaviour
     private void ChickenInteract()
     {
         // pick up near object
-        if(currentHeld == null && currentNear != null)
+        if(currentHeld == null)
         {
-            Debug.Log("Picking up item");
-            currentHeld = currentNear;
-            currentHeld.gameObject.GetComponent<BoxCollider>().enabled = false;
-            currentHeld.transform.SetParent(this.transform);
+            AttemptPickup();
         }
         // place held object
-        else if(currentHeld != null)
+        else
         {
-            Debug.Log("Placing item");
-            currentHeld.transform.SetParent(null);
-            currentHeld.gameObject.GetComponent<BoxCollider>().enabled = true;
-            currentHeld = null;
+            AttemptPlace();
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void AttemptPickup()
     {
-        if(other.CompareTag("Pickupable"))
-        {
-            Debug.Log("Item in range");
-            currentNear = other.gameObject.GetComponentInParent<Pickup>();
-        }
+        Transform cameraTrans = transform.Find("Main Camera");
+
+        Ray viewRay = new Ray(cameraTrans.position, cameraTrans.forward);
+
+        if (!Physics.Raycast(viewRay, out RaycastHit hitData, pickUpRange)
+            || !hitData.collider.CompareTag("Pickupable"))
+            return;
+
+        Debug.Log("Picking up item");
+        currentHeld = hitData.collider.gameObject.GetComponent<Pickup>();
+        currentHeld.gameObject.GetComponent<BoxCollider>().enabled = false;
+
+        currentHeld.PickUp();
+        PlaceSpace previousRoost = currentHeld.GetComponentInParent<PlaceSpace>();
+        if(previousRoost != null)
+            previousRoost.PickUp();
+        currentHeld.transform.SetParent(this.transform);
     }
 
-    private void OnTriggerExit(Collider other)
+    private void AttemptPlace()
     {
-        if (other.CompareTag("Pickupable"))
-        {
-            Debug.Log("Item not in range");
-            currentNear = null;
-        }
+        Transform cameraTrans = transform.Find("Main Camera");
+
+        Ray viewRay = new Ray(cameraTrans.position, cameraTrans.forward);
+
+        if (!Physics.Raycast(viewRay, out RaycastHit hitData, pickUpRange)
+            || !hitData.collider.CompareTag("PlaceSpace")
+            || !hitData.collider.GetComponent<PlaceSpace>().isVacant)
+            return;
+
+        Debug.Log("Placing item");
+        Transform heldTransform = currentHeld.transform;
+
+        heldTransform.SetParent(hitData.collider.gameObject.transform.Find("Roost Top"));
+        heldTransform.localPosition = Vector3.zero;
+        heldTransform.localEulerAngles = Vector3.zero;
+        currentHeld.gameObject.GetComponent<BoxCollider>().enabled = true;
+        currentHeld.Place();
+        hitData.collider.GetComponent<PlaceSpace>().Place();
+        currentHeld = null;
     }
 }
