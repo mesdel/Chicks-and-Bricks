@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlaceSpace : MonoBehaviour
+public abstract class PlaceSpace : MonoBehaviour
 {
     public bool isVacant { get; private set; }
 
@@ -20,4 +21,6 @@ public class PlaceSpace : MonoBehaviour
     {
         isVacant = false;
     }
+
+    abstract public void ChickInteract(GameObject chick);
 }

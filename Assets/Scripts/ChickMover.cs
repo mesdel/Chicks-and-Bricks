@@ -20,7 +20,7 @@ public class ChickMover : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collision");
+        Debug.Log("Chick Collision");
         if(collision.gameObject.CompareTag("Goal"))
         {
             // TODO: add score
@@ -32,6 +32,15 @@ public class ChickMover : MonoBehaviour
             // TODO: subtract score
 
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Chick Trigger Enter");
+        if(other.gameObject.CompareTag("PlaceSpace"))
+        {
+            other.gameObject.GetComponentInParent<PlaceSpace>().ChickInteract(this.gameObject);
         }
     }
 }

@@ -10,6 +10,7 @@ TagManager:
   - PlaceSpace
   - Goal
   - Hazard
+  - Start
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - 
   - Water
   - UI
-  - Interactable
-  - 
+  - Player
+  - Noninteractable
   - 
   - 
   - 
