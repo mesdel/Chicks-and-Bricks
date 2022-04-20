@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     {
         for(int i = 0; i < hazards.transform.childCount; i++)
         {
-            Transform spawnTransform = hazards.transform.GetChild(i);
+            Transform spawnTransform = hazards.transform.GetChild(i).Find("Spawn Position");
             SpawnChild(spawnTransform, hazardPrefab);
         }
     }
