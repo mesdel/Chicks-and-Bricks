@@ -16,18 +16,23 @@ public class PlayerController : MonoBehaviour
     private float jumpForce;
     private bool isGrounded;
 
+    private Animator animator;
+
     void Awake()
     {
         // move below line to more applicable script
         Application.targetFrameRate = 60;
 
         playerRb = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
+        isGrounded = true;
     }
 
     void FixedUpdate()
     {
         HandleKeyMovement();
         HandleJump();
+        UpdateAnimator();
     }
 
     private void HandleKeyMovement()
@@ -43,10 +48,18 @@ public class PlayerController : MonoBehaviour
         playerRb.AddRelativeForce(toMove, ForceMode.Force);
     }
 
+    private void UpdateAnimator()
+    {
+        
+        animator.SetFloat("velocity", playerRb.velocity.magnitude);
+        animator.SetBool("isGrounded", isGrounded);
+    }
+
     private void HandleJump()
     {
         if(isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
+            animator.SetTrigger("jump");
             isGrounded = false;
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }

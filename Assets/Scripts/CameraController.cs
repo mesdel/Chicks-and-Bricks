@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour
     private float xRotation;
     private float yRotation;
     private float xRotationMin = -80;
-    private float xRotationMax = 80;
+    private float xRotationMax = 55;
 
     void Awake()
     {
