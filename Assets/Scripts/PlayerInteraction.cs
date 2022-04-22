@@ -8,65 +8,64 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField]
     private float pickUpRange;
 
+    GameManager gameManager;
+
     void Awake()
     {
         currentHeld = null;
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     void FixedUpdate()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            ChickenInteract();
+            Interact();
         }
     }
 
-    private void ChickenInteract()
-    {
-        // pick up near object
-        if(currentHeld == null)
-        {
-            AttemptPickup();
-        }
-        // place held object
-        else
-        {
-            AttemptPlace();
-        }
-    }
-
-    private void AttemptPickup()
+    private void Interact()
     {
         Transform cameraTrans = transform.Find("Main Camera");
 
         Ray viewRay = new Ray(cameraTrans.position, cameraTrans.forward);
+        bool didHit = Physics.Raycast(viewRay, out RaycastHit hitData, pickUpRange);
 
-        if (!Physics.Raycast(viewRay, out RaycastHit hitData, pickUpRange)
-            || !hitData.collider.CompareTag("Pickupable"))
+        if (!didHit)
             return;
 
+        // pick up near object
+        if (currentHeld == null && hitData.collider.CompareTag("Pickupable"))
+        {
+            Pickup(hitData);
+        }
+        // place held object
+        else if (currentHeld != null && hitData.collider.CompareTag("PlaceSpace")
+            && hitData.collider.GetComponent<PlaceSpace>().isVacant)
+        {
+            Place(hitData);
+        }
+        else if (hitData.collider.CompareTag("WorldButton"))
+        {
+            PressButton(hitData);
+        }
+    }
+
+    private void Pickup(RaycastHit hitData)
+    {
         Debug.Log("Picking up item");
         currentHeld = hitData.collider.gameObject.GetComponent<Pickup>();
         currentHeld.gameObject.GetComponent<BoxCollider>().enabled = false;
 
         currentHeld.PickUp();
         PlaceSpace previousRoost = currentHeld.GetComponentInParent<PlaceSpace>();
-        if(previousRoost != null)
+        if (previousRoost != null)
             previousRoost.PickUp();
         currentHeld.transform.SetParent(this.transform);
     }
 
-    private void AttemptPlace()
+    private void Place(RaycastHit hitData)
     {
-        Transform cameraTrans = transform.Find("Main Camera");
-
-        Ray viewRay = new Ray(cameraTrans.position, cameraTrans.forward);
-
-        if (!Physics.Raycast(viewRay, out RaycastHit hitData, pickUpRange)
-            || !hitData.collider.CompareTag("PlaceSpace")
-            || !hitData.collider.GetComponent<PlaceSpace>().isVacant)
-            return;
-
         Debug.Log("Placing item");
         Transform heldTransform = currentHeld.transform;
 
@@ -77,5 +76,15 @@ public class PlayerInteraction : MonoBehaviour
         currentHeld.Place();
         hitData.collider.GetComponent<PlaceSpace>().Place();
         currentHeld = null;
+    }
+
+    private void PressButton(RaycastHit hitData)
+    {
+        // if adding other buttons, check button type here
+
+        Debug.Log("Pressing button");
+        gameManager.StartButton();
+
+        hitData.collider.gameObject.GetComponent<WorldButton>().Press();
     }
 }

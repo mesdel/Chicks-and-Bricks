@@ -16,23 +16,33 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject hazardPrefab;
 
-    // Start is called before the first frame update
-    void Start()
+    bool isActive;
+    [SerializeField]
+    private float numChicks;
+    private float chickSpawnDelay = 3.0f;
+
+    void Awake()
     {
-        InvokeRepeating("SpawnChick", 2.0f, 3.0f);
         InvokeRepeating("SpawnHazards", 1.0f, 1.0f);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartButton()
     {
-        
+        if(!isActive)
+        {
+            isActive = true;
+            StartCoroutine(SpawnChick());
+        }
     }
 
-    private void SpawnChick()
+    private IEnumerator SpawnChick()
     {
-        Transform spawnTransform = chickStart.transform.Find("Spawn Position");
-        SpawnChild(spawnTransform, chickPrefab);
+        for(int i = 0; i < numChicks; i++)
+        {
+            Transform spawnTransform = chickStart.transform.Find("Spawn Position");
+            SpawnChild(spawnTransform, chickPrefab);
+            yield return new WaitForSeconds(chickSpawnDelay);
+        }   
     }
 
     private void SpawnHazards()
