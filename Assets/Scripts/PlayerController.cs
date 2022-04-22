@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
 
+    private Vector3 spawnPosition = new Vector3(-3.5f, 0.1f, -8.3f);
+
     void Awake()
     {
         // move below line to more applicable script
@@ -69,5 +71,11 @@ public class PlayerController : MonoBehaviour
     {
         //if (collision.gameObject.CompareTag("Ground"))
         isGrounded = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Respawn"))
+            transform.position = spawnPosition;
     }
 }
