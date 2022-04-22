@@ -20,6 +20,7 @@ public class CameraController : MonoBehaviour
         playerCam = GameObject.Find("Main Camera");
         xRotation = yRotation = 0;
         Cursor.lockState = CursorLockMode.Locked;
+        Debug.Log("Camera Controller loaded");
     }
 
     void FixedUpdate()
