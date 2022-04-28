@@ -27,16 +27,19 @@ public class BGPlayer : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(this);
         audioSources = GetComponents<AudioSource>();
-        Play();
+        StartCoroutine(Play());
     }
 
-    private void Play()
+    private IEnumerator Play()
     {
-        // todo: query volume setting
-        foreach(AudioSource audioSource in audioSources)
-        {
-            audioSource.Play();
-        }
+        yield return StartCoroutine(DataSaver.WaitForData());
+
+        // the first audio source is music, 2nd is ambiance
+        audioSources[0].volume = DataSaver.instance.musicVolume;
+        audioSources[0].Play();
+
+        audioSources[1].volume = DataSaver.instance.ambiVolume;
+        audioSources[1].Play();
     }
 
     public void AdjustVolume()

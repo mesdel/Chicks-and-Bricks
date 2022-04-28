@@ -5,27 +5,26 @@ using UnityEngine;
 public class WorldButton : MonoBehaviour
 {
     public bool isPressed {get; private set; }
-    private bool finishedMove;
     private float speed = 0.5f;
 
     void Awake()
     {
-        isPressed = finishedMove = false;
+        isPressed = false;
     }
 
     void FixedUpdate()
     {
-        if(isPressed && !finishedMove)
+        if(isPressed)
         {
             transform.Translate(Vector3.down * speed * Time.deltaTime);
             if (transform.position.y <= 0)
-                finishedMove = true;
+                Destroy(gameObject);
         }
-
     }
 
     public void Press()
     {
         isPressed = true;
+        transform.Find("Button Prompt").gameObject.SetActive(false);
     }
 }
