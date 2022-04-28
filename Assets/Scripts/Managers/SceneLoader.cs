@@ -20,6 +20,11 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(levelNum);
     }
 
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(MAIN_MENU_INDEX);
+    }
+
     public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

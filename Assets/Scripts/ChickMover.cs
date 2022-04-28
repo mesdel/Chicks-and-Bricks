@@ -7,12 +7,6 @@ public class ChickMover : MonoBehaviour
     [SerializeField]
     private float speed;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     void FixedUpdate()
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
@@ -23,14 +17,12 @@ public class ChickMover : MonoBehaviour
         Debug.Log("Chick Collision");
         if(collision.gameObject.CompareTag("Goal"))
         {
-            // TODO: add score
-
+            GameManager.instance.ChickArrives();
             Destroy(gameObject);
         }
         else if (collision.gameObject.CompareTag("Hazard"))
         {
-            // TODO: subtract score
-
+            GameManager.instance.ChickFails();
             Destroy(gameObject);
         }
     }

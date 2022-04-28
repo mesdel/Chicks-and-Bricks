@@ -25,7 +25,6 @@ public class CameraController : MonoBehaviour
 
     void FixedUpdate()
     {
-
         float horizontalInput = Input.GetAxis("Mouse X");
         float verticalInput = Input.GetAxis("Mouse Y");
 
