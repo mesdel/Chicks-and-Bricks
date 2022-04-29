@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    private const int MAIN_MENU_INDEX = 0;
+    private static int MAIN_MENU_INDEX = 0;
+    private static int TUTORIAL_INDEX = 1;
 
     private void Awake()
     {
@@ -13,6 +14,16 @@ public class SceneLoader : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
         }
+    }
+
+    public static bool IsMainMenu()
+    {
+        return SceneManager.GetActiveScene().buildIndex == MAIN_MENU_INDEX;
+    }
+
+    public static bool IsTutorial()
+    {
+        return SceneManager.GetActiveScene().buildIndex == TUTORIAL_INDEX;
     }
 
     public void LoadLevel(int levelNum)

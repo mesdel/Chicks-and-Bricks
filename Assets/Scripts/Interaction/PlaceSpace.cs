@@ -7,7 +7,7 @@ public abstract class PlaceSpace : MonoBehaviour
 {
     public bool isVacant { get; private set; }
 
-    void Awake()
+    protected void Awake()
     {
         isVacant = true;
     }
@@ -19,6 +19,7 @@ public abstract class PlaceSpace : MonoBehaviour
 
     public void Place()
     {
+        Debug.Log("Placing");
         isVacant = false;
     }
 

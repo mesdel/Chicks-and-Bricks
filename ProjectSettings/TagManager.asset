@@ -12,6 +12,7 @@ TagManager:
   - Hazard
   - Start
   - WorldButton
+  - Tutorial
   layers:
   - Default
   - TransparentFX

@@ -25,7 +25,8 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         instance = this;
-        StartCoroutine(InitializeSliders());
+        if(SceneLoader.IsMainMenu())
+            StartCoroutine(InitializeSliders());
     }
 
     private IEnumerator InitializeSliders()

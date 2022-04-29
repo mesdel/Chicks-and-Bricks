@@ -224,7 +224,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1360
+  m_Name: pb_Mesh-289200
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -701,6 +701,7 @@ GameObject:
   - component: {fileID: 185906543}
   - component: {fileID: 185906544}
   - component: {fileID: 185906545}
+  - component: {fileID: 185906546}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -720,11 +721,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c6955cb517835e4d9df08d3c8b0839a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chickStart: {fileID: 380405120}
-  chickGoal: {fileID: 1091876784}
-  chickPrefab: {fileID: 895718084871553927, guid: eeda7340612cea0439dbbf781e212642, type: 3}
-  hazards: {fileID: 652874618}
-  hazardPrefab: {fileID: 6380619732672275388, guid: 2589649b383774c49abe1cec0cea66b3, type: 3}
   numChicks: 10
   scoreText: {fileID: 2117623157}
 --- !u!4 &185906542
@@ -756,6 +752,9 @@ MonoBehaviour:
   pauseMenu: {fileID: 1832633101}
   gameOverMenu: {fileID: 2032322001}
   winMenu: {fileID: 1305769608}
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  ambiSlider: {fileID: 0}
 --- !u!114 &185906544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -780,10 +779,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 846e8254347eaed44b55d27df013970c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFXVolume: 0
+  sfxVolume: 0
   musicVolume: 0
   ambiVolume: 0
   levelsCompleted: 0
+--- !u!114 &185906546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185906540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 923c0b275638fa045af374db6a9211a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chickStart: {fileID: 380405120}
+  chickPrefab: {fileID: 895718084871553927, guid: eeda7340612cea0439dbbf781e212642, type: 3}
+  hazards: {fileID: 652874618}
+  hazardPrefab: {fileID: 6380619732672275388, guid: 2589649b383774c49abe1cec0cea66b3, type: 3}
+  tutorialSpawner: 0
 --- !u!1 &201253136
 GameObject:
   m_ObjectHideFlags: 0
@@ -3574,7 +3590,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1348
+  m_Name: pb_Mesh-289188
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

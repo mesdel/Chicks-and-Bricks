@@ -25,6 +25,10 @@ public class ChickMover : MonoBehaviour
             GameManager.instance.ChickFails();
             Destroy(gameObject);
         }
+        else if(collision.gameObject.CompareTag("Tutorial"))
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

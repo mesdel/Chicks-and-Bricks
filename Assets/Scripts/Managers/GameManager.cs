@@ -5,22 +5,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject chickStart;
-    [SerializeField]
-    private GameObject chickGoal;
-    [SerializeField]
-    private GameObject chickPrefab;
-
-    [SerializeField]
-    private GameObject hazards;
-    [SerializeField]
-    private GameObject hazardPrefab;
-
     bool chicksActive;
     [SerializeField]
-    private float numChicks;
-    private float chickSpawnDelay = 3.0f;
+    private int numChicks;
 
     [SerializeField]
     private TextMeshProUGUI scoreText;
@@ -30,25 +17,34 @@ public class GameManager : MonoBehaviour
     private bool gamePaused;
     KeyCode pauseKey;
 
+    private bool isTutorial;
+    private Spawner[] spawners;
+
     void Awake()
     {
+        isTutorial = SceneLoader.IsTutorial();
         Time.timeScale = 1;
         gamePaused = false;
         gameOver = false;
         currScore = 0;
-        scoreText.text = currScore + "/" + numChicks + " chicks";
-        InvokeRepeating("SpawnHazards", 1.0f, 1.0f);
         instance = this;
 
+        // set pause key depending on editor/application
         pauseKey = KeyCode.Escape;
 #if UNITY_EDITOR
         pauseKey = KeyCode.P;
 #endif
+        
+        scoreText.text = currScore + "/" + numChicks + " chicks";
+        spawners = gameObject.GetComponents<Spawner>();
+        foreach(Spawner spawner in spawners)
+        {
+            spawner.StartHazards();
+        }
     }
 
     private void Update()
     {
-
         if (!gameOver && Input.GetKeyDown(pauseKey))
         {
             if(gamePaused)
@@ -69,35 +65,8 @@ public class GameManager : MonoBehaviour
         if(!chicksActive)
         {
             chicksActive = true;
-            StartCoroutine(SpawnChick());
+            spawners[0].SpawnChicks(numChicks);
         }
-    }
-
-    private IEnumerator SpawnChick()
-    {
-        for(int i = 0; i < numChicks; i++)
-        {
-            Transform spawnTransform = chickStart.transform.Find("Spawn Position");
-            SpawnChild(spawnTransform, chickPrefab);
-            yield return new WaitForSeconds(chickSpawnDelay);
-        }   
-    }
-
-    private void SpawnHazards()
-    {
-        for(int i = 0; i < hazards.transform.childCount; i++)
-        {
-            Transform spawnTransform = hazards.transform.GetChild(i).Find("Spawn Position");
-            SpawnChild(spawnTransform, hazardPrefab);
-        }
-    }
-
-    // todo: object pooling for hazard projectiles
-
-    private void SpawnChild(Transform spawnTransform, GameObject prefab)
-    {
-        GameObject child = GameObject.Instantiate(prefab, spawnTransform.position, spawnTransform.rotation);
-        child.transform.SetParent(spawnTransform);
     }
 
     public void ChickArrives()
