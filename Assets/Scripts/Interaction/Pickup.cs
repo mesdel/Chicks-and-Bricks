@@ -23,6 +23,7 @@ public class Pickup : MonoBehaviour
         
     }
 
+    // todo: set up toon chicken's renderer to also have a semi-transparent pickup material
     public void PickUp()
     {
         gameObject.GetComponent<MeshRenderer>().material = pickupMat;

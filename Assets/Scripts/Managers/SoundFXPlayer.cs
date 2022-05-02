@@ -13,6 +13,10 @@ public class SoundFXPlayer : MonoBehaviour
     private IEnumerator LoadVolume()
     {
         yield return StartCoroutine(DataSaver.WaitForData());
-        GetComponent<AudioSource>().volume = DataSaver.instance.sfxVolume;
+        AudioSource[] sfx = GetComponents<AudioSource>();
+        foreach (AudioSource soundEffect in sfx)
+        {
+            soundEffect.volume = DataSaver.instance.sfxVolume;
+        }
     }
 }

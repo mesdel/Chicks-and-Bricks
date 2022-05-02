@@ -10,6 +10,9 @@ public class PlayerInteraction : MonoBehaviour
 
     GameManager gameManager;
 
+    [SerializeField]
+    private Transform handTransform;
+
     void Awake()
     {
         currentHeld = null;
@@ -61,7 +64,10 @@ public class PlayerInteraction : MonoBehaviour
         PlaceSpace previousRoost = currentHeld.GetComponentInParent<PlaceSpace>();
         if (previousRoost != null)
             previousRoost.PickUp();
-        currentHeld.transform.SetParent(this.transform);
+
+        currentHeld.transform.SetParent(handTransform);
+        currentHeld.transform.localPosition = Vector3.zero;
+        currentHeld.transform.localEulerAngles = Vector3.zero;
     }
 
     private void Place(RaycastHit hitData)

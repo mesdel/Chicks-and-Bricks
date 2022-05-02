@@ -20,12 +20,12 @@ public class BGPlayer : MonoBehaviour
     {
         if (instance != null)
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
 
         instance = this;
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
         audioSources = GetComponents<AudioSource>();
         StartCoroutine(Play());
     }

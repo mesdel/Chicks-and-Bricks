@@ -13,7 +13,7 @@ public class DataSaver : MonoBehaviour
     public float ambiVolume;
     public float levelsCompleted;
 
-    public static bool isLoaded;
+    public bool isLoaded;
 
     [System.Serializable]
     class Settings
@@ -34,12 +34,12 @@ public class DataSaver : MonoBehaviour
         isLoaded = false;
         if(instance != null)
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
 
         instance = this;
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
         LoadProgress();
         LoadSettings();
         isLoaded = true;
@@ -47,10 +47,11 @@ public class DataSaver : MonoBehaviour
 
     static public IEnumerator WaitForData()
     {
-        while (!DataSaver.isLoaded)
+        while (!instance.isLoaded)
         {
             yield return new WaitForEndOfFrame();
         }
+        yield return null;
     }
 
     public void SaveSettings()
