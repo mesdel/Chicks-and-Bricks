@@ -13,7 +13,7 @@ public class DataSaver : MonoBehaviour
     public float ambiVolume;
     public float levelsCompleted;
 
-    public bool isLoaded;
+    public static bool isLoaded;
 
     [System.Serializable]
     class Settings
@@ -47,7 +47,7 @@ public class DataSaver : MonoBehaviour
 
     static public IEnumerator WaitForData()
     {
-        while (!instance.isLoaded)
+        while (!isLoaded)
         {
             yield return new WaitForEndOfFrame();
         }

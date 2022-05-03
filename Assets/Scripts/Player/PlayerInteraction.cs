@@ -7,16 +7,24 @@ public class PlayerInteraction : MonoBehaviour
     private Pickup currentHeld;
     [SerializeField]
     private float pickUpRange;
+    [SerializeField]
+    private float placeRange;
 
-    GameManager gameManager;
+    private GameManager gameManager;
+    [SerializeField]
+    private GridHandler gridHandler;
 
     [SerializeField]
     private Transform handTransform;
+    private Transform cameraTrans;
 
     void Awake()
     {
         currentHeld = null;
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        gridHandler.Activate(false);
+
+        cameraTrans = transform.Find("Main Camera");
     }
 
     void FixedUpdate()
@@ -25,12 +33,19 @@ public class PlayerInteraction : MonoBehaviour
         {
             Interact();
         }
+        if (currentHeld != null)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+                gridHandler.RotateGhost();
+            gridHandler.ProjectGhost(placeRange, cameraTrans);
+        }
+
+        
+            gridHandler.ProjectGhost(placeRange, cameraTrans);
     }
 
     private void Interact()
     {
-        Transform cameraTrans = transform.Find("Main Camera");
-
         Ray viewRay = new Ray(cameraTrans.position, cameraTrans.forward);
         bool didHit = Physics.Raycast(viewRay, out RaycastHit hitData, pickUpRange);
 
@@ -60,6 +75,7 @@ public class PlayerInteraction : MonoBehaviour
         currentHeld = hitData.collider.gameObject.GetComponent<Pickup>();
         currentHeld.gameObject.GetComponent<BoxCollider>().enabled = false;
 
+        gridHandler.Activate(true);
         currentHeld.PickUp();
         PlaceSpace previousRoost = currentHeld.GetComponentInParent<PlaceSpace>();
         if (previousRoost != null)
@@ -82,6 +98,8 @@ public class PlayerInteraction : MonoBehaviour
         currentHeld.Place();
         hitData.collider.GetComponent<PlaceSpace>().Place();
         currentHeld = null;
+
+        gridHandler.Activate(false);
     }
 
     private void PressButton(RaycastHit hitData)

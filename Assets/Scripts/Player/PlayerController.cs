@@ -8,13 +8,7 @@ public class PlayerController : MonoBehaviour
     private float speed;
     [SerializeField]
     private float maxVelocity;
-    [SerializeField]
-    private float airDrag;
     private Rigidbody playerRb;
-
-    [SerializeField]
-    private float jumpForce;
-    private bool isGrounded;
 
     private Animator animator;
 
@@ -27,25 +21,22 @@ public class PlayerController : MonoBehaviour
 
         playerRb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
-        isGrounded = true;
     }
 
     void FixedUpdate()
     {
         HandleKeyMovement();
-        HandleJump();
         UpdateAnimator();
     }
 
     private void HandleKeyMovement()
     {
-        float forceScalar = isGrounded ? 1.0f : (1.0f - airDrag);
 
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
         Vector3 toMove = new Vector3(horizontalInput, 0, verticalInput);
-        toMove = toMove.normalized * speed * forceScalar;
+        toMove = toMove.normalized * speed;
 
         playerRb.AddRelativeForce(toMove, ForceMode.Force);
     }
@@ -54,23 +45,6 @@ public class PlayerController : MonoBehaviour
     {
         
         animator.SetFloat("velocity", playerRb.velocity.magnitude);
-        animator.SetBool("isGrounded", isGrounded);
-    }
-
-    private void HandleJump()
-    {
-        if(isGrounded && Input.GetKeyDown(KeyCode.Space))
-        {
-            animator.SetTrigger("jump");
-            isGrounded = false;
-            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        //if (collision.gameObject.CompareTag("Ground"))
-        isGrounded = true;
     }
 
     private void OnTriggerEnter(Collider other)
