@@ -57,29 +57,43 @@ public class PlayerInteraction : MonoBehaviour
         {
             Pickup(hitData);
         }
-        // place held object
-        else if (currentHeld != null && hitData.collider.CompareTag("PlaceSpace")
-            && hitData.collider.GetComponent<PlaceSpace>().isVacant)
-        {
-            Place(hitData);
-        }
+        // press world button
         else if (hitData.collider.CompareTag("WorldButton"))
         {
             PressButton(hitData);
+        }
+        // attempt place held object at ghost location
+        else
+        {
+            // todo: rework
+            // todo: query grid
+            // disregard viewray
+
+            // attempt place
+            /* else if (currentHeld != null && hitData.collider.CompareTag("PlaceSpace")
+            && hitData.collider.GetComponent<Chicken>().isActive)
+            {
+                Place(hitData);
+            }
+             */
         }
     }
 
     private void Pickup(RaycastHit hitData)
     {
+        // todo: rework
+
         Debug.Log("Picking up item");
         currentHeld = hitData.collider.gameObject.GetComponent<Pickup>();
         currentHeld.gameObject.GetComponent<BoxCollider>().enabled = false;
 
         gridHandler.Activate(true);
         currentHeld.PickUp();
-        PlaceSpace previousRoost = currentHeld.GetComponentInParent<PlaceSpace>();
-        if (previousRoost != null)
-            previousRoost.PickUp();
+
+        // replace this with updating grid
+        //Chicken previousRoost = currentHeld.GetComponentInParent<Chicken>();
+        //if (previousRoost != null)
+        //    previousRoost.PickUp();
 
         currentHeld.transform.SetParent(handTransform);
         currentHeld.transform.localPosition = Vector3.zero;
@@ -88,6 +102,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Place(RaycastHit hitData)
     {
+        // todo: rework
         Debug.Log("Placing item");
         Transform heldTransform = currentHeld.transform;
 
@@ -96,7 +111,7 @@ public class PlayerInteraction : MonoBehaviour
         heldTransform.localEulerAngles = Vector3.zero;
         currentHeld.gameObject.GetComponent<BoxCollider>().enabled = true;
         currentHeld.Place();
-        hitData.collider.GetComponent<PlaceSpace>().Place();
+        hitData.collider.GetComponent<Chicken>().Place();
         currentHeld = null;
 
         gridHandler.Activate(false);

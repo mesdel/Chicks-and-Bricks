@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoostSpace : PlaceSpace
+public class RoostSpace : Chicken
 {
     [SerializeField]
     private bool preoccupied = false;
@@ -16,7 +16,7 @@ public class RoostSpace : PlaceSpace
 
     override public void ChickInteract(GameObject chick)
     {
-        if(!isVacant)
+        if(isActive)
         {
             chick.transform.eulerAngles = this.transform.eulerAngles;
         }

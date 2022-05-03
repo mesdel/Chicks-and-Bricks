@@ -7,12 +7,12 @@ TagManager:
   - CinemachineTarget
   - Ground
   - Pickupable
-  - PlaceSpace
   - Goal
   - Hazard
   - Start
   - WorldButton
   - Tutorial
+  - ChickenTrigger
   layers:
   - Default
   - TransparentFX

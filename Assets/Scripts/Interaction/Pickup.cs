@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    [SerializeField]
-    private Material defaultMat;
-    [SerializeField]
-    private Material pickupMat;
-
     public bool mousedOver { get; private set; }
 
     // Start is called before the first frame update
@@ -23,14 +18,13 @@ public class Pickup : MonoBehaviour
         
     }
 
-    // todo: set up toon chicken's renderer to also have a semi-transparent pickup material
     public void PickUp()
     {
-        gameObject.GetComponent<MeshRenderer>().material = pickupMat;
+        transform.Find("Full Cell").gameObject.SetActive(false);
     }
 
     public void Place()
     {
-        gameObject.GetComponent<MeshRenderer>().material = defaultMat;
+
     }
 }

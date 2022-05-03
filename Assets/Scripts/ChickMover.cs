@@ -34,9 +34,9 @@ public class ChickMover : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Chick Trigger Enter");
-        if(other.gameObject.CompareTag("PlaceSpace"))
+        if(other.gameObject.CompareTag("ChickenTrigger"))
         {
-            other.gameObject.GetComponentInParent<PlaceSpace>().ChickInteract(this.gameObject);
+            other.gameObject.GetComponentInParent<Chicken>().ChickInteract(this.gameObject);
         }
     }
 }

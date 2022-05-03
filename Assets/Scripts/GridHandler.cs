@@ -10,6 +10,61 @@ public class GridHandler : MonoBehaviour
     private float cellSize = 1.0f;
     private float offSet = 0.5f;
 
+    [SerializeField]
+    private GameObject chickens;
+    private Transform fullCellGroup;
+    [SerializeField]
+    private GameObject fullCellPrefab;
+
+    private bool[][] grid;
+    private int gridSize = 40;
+
+    private void Awake()
+    {
+        fullCellGroup = transform.Find("Occupied Cells");
+        InitGrid();
+    }
+
+    private void InitGrid()
+    {
+        grid = new bool[gridSize][];
+        for(int i = 0; i < gridSize; i++)
+        {
+            grid[i] = new bool[gridSize];
+        }
+
+        foreach(Transform cellT in fullCellGroup)
+        {
+            FillCell(cellT);
+        }
+        foreach(Transform cellT in chickens.transform)
+        {
+            FillCell(cellT);
+        }
+
+        //todo: delete debug
+        //PrintGrid();
+    }
+
+    private void FillCell(Transform worldT)
+    {
+        Vector2 gridCoords = WorldToCell(worldT.position.x, worldT.position.z);
+        grid[(int)(gridCoords.x)][(int)(gridCoords.y)] = true;
+    }
+
+    private void PrintGrid()
+    {
+        for(int i = 0; i < gridSize; i++)
+        {
+            string row = "";
+            for (int k = 0; k < gridSize; k++)
+            {
+                row += grid[i][k] + ", ";
+            }
+            Debug.Log(i + ": " + row);
+        }
+    }
+
     private Vector3 GridSnap(Vector3 point)
     {
         Vector3 newPoint = new Vector3();
@@ -44,5 +99,38 @@ public class GridHandler : MonoBehaviour
     public void Activate(bool activeVal)
     {
         gameObject.SetActive(activeVal);
+        foreach(Transform chickenT in chickens.transform)
+        {
+            chickenT.Find("Full Cell").gameObject.SetActive(activeVal);  
+        }
+    }
+
+    // todo
+    private Vector2 WorldToCell(float wx, float wy)
+    {
+        float cellX, cellY;
+
+        cellX = wx - offSet + gridSize / 2.0f;
+        cellY = wy - offSet + gridSize / 2.0f;
+
+        return new Vector2(cellX, cellY);
+    }
+
+    private Vector2 CellToWorld(float cx, float cy)
+    {
+        return new Vector2();
+    }
+
+    public void PlaceOnGrid(float wx, float wy)
+    {
+        // translate world to cell, update grid, instantiate full cell
+    }
+
+    public void PickUpFromGrid(float wx, float wy)
+    {
+        // translate world to cell, update grid, delete full cell
+
+        // problem to solve: link chicken with its full cell object?
+        // possible fix: have every chicken have the object as child and act/deact on place/pickup
     }
 }
