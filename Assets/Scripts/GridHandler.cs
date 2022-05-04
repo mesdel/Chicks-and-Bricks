@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class GridHandler : MonoBehaviour
 {
-    [SerializeField]
-    private Transform ghostTrans;
+    public Transform ghostTrans;
     private float defaultGhostY = 0.0f;
-    private float cellSize = 1.0f;
     private float offSet = 0.5f;
 
-    [SerializeField]
-    private GameObject chickens;
+    public GameObject chickens;
+    private List<Vector3> oldChickenPos;
     private Transform fullCellGroup;
     [SerializeField]
     private GameObject fullCellPrefab;
@@ -19,10 +17,22 @@ public class GridHandler : MonoBehaviour
     private bool[][] grid;
     private int gridSize = 40;
 
+    [SerializeField]
+    private Material defaultGhostMat;
+    [SerializeField]
+    private Material redGhostMat;
+    private SkinnedMeshRenderer ghostRenderer;
+    public bool validGhost { private set; get; }
+
+    // todo: give ghost chicken its own class
+
     private void Awake()
     {
         fullCellGroup = transform.Find("Occupied Cells");
+        ghostTrans = transform.Find("Ghost Chicken");
         InitGrid();
+        ghostRenderer = ghostTrans.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+        ghostRenderer.material = defaultGhostMat;
     }
 
     private void InitGrid()
@@ -35,21 +45,41 @@ public class GridHandler : MonoBehaviour
 
         foreach(Transform cellT in fullCellGroup)
         {
-            FillCell(cellT);
-        }
-        foreach(Transform cellT in chickens.transform)
-        {
-            FillCell(cellT);
+            SetCell(cellT.position, true);
         }
 
-        //todo: delete debug
+        // init chicken cells and save to old list
+        InitChickenGrid();
+
         //PrintGrid();
     }
 
-    private void FillCell(Transform worldT)
+    private void InitChickenGrid()
     {
-        Vector2 gridCoords = WorldToCell(worldT.position.x, worldT.position.z);
-        grid[(int)(gridCoords.x)][(int)(gridCoords.y)] = true;
+        oldChickenPos = new List<Vector3>();
+        foreach (Transform cellT in chickens.transform)
+        {
+            SetCell(cellT.position, true);
+            oldChickenPos.Add(cellT.transform.position);
+        }
+    }
+
+    public void UpdateGrid()
+    {
+        foreach(Vector3 worldPos in oldChickenPos)
+        {
+            // reset all old chicken cells
+            SetCell(worldPos, false);
+        }
+
+        // update chicken cells and save to old list
+        InitChickenGrid();
+    }
+
+    private void SetCell(Vector3 worldPos, bool value)
+    {
+        Vector2 gridCoords = WorldToCell(worldPos.x, worldPos.z);
+        grid[(int)(gridCoords.x)][(int)(gridCoords.y)] = value;
     }
 
     private void PrintGrid()
@@ -89,6 +119,19 @@ public class GridHandler : MonoBehaviour
         {
             ghostTrans.position = GridSnap(cameraTrans.position + cameraTrans.forward * range);
         }
+
+        Vector2 ghostsCell = WorldToCell(ghostTrans.position.x, ghostTrans.position.z);
+        if(grid[(int)ghostsCell.x][(int)ghostsCell.y])
+        // cell is full
+        {
+            ghostRenderer.material = redGhostMat;
+            validGhost = false;
+        }
+        else // cell is empty
+        {
+            ghostRenderer.material = defaultGhostMat;
+            validGhost = true;
+        }
     }
 
     public void RotateGhost()
@@ -114,23 +157,5 @@ public class GridHandler : MonoBehaviour
         cellY = wy - offSet + gridSize / 2.0f;
 
         return new Vector2(cellX, cellY);
-    }
-
-    private Vector2 CellToWorld(float cx, float cy)
-    {
-        return new Vector2();
-    }
-
-    public void PlaceOnGrid(float wx, float wy)
-    {
-        // translate world to cell, update grid, instantiate full cell
-    }
-
-    public void PickUpFromGrid(float wx, float wy)
-    {
-        // translate world to cell, update grid, delete full cell
-
-        // problem to solve: link chicken with its full cell object?
-        // possible fix: have every chicken have the object as child and act/deact on place/pickup
     }
 }

@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 736599280534455823}
   - component: {fileID: 736599280534455816}
-  - component: {fileID: 736599280534455819}
   - component: {fileID: 665435594888046055}
+  - component: {fileID: 406174497764580476}
   m_Layer: 7
   m_Name: Chicken
   m_TagString: Pickupable
@@ -47,20 +47,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4, y: 1.4, z: 1.4}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &736599280534455819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 736599280534455818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd6923616957b3e429e307a31a19aa2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &665435594888046055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,6 +62,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onGrass: 0
+--- !u!114 &406174497764580476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736599280534455818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c2a6d970082204ab45ab76ba77f8d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preoccupied: 0
 --- !u!1 &8019093892497384853
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,7 +102,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8019093892497384853}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 1}
   m_LocalScale: {x: 0.2, y: 1, z: 0.2}
   m_Children: []
   m_Father: {fileID: 736599280534455823}
@@ -186,7 +187,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 756387797022894707, guid: bbd447fa66510344ebc3d61862a7636d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.495
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 756387797022894707, guid: bbd447fa66510344ebc3d61862a7636d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -268,7 +269,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4303844821561524, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4303844821561524, guid: 312b31977ed9b2d48a14849ebb8c7fb3, type: 3}
       propertyPath: m_LocalPosition.z

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    private Pickup currentHeld;
+    private Chicken currentHeld;
     [SerializeField]
     private float pickUpRange;
     [SerializeField]
@@ -27,7 +27,7 @@ public class PlayerInteraction : MonoBehaviour
         cameraTrans = transform.Find("Main Camera");
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -39,13 +39,18 @@ public class PlayerInteraction : MonoBehaviour
                 gridHandler.RotateGhost();
             gridHandler.ProjectGhost(placeRange, cameraTrans);
         }
-
-        
-            gridHandler.ProjectGhost(placeRange, cameraTrans);
     }
 
     private void Interact()
     {
+        // place held object if ghost location is valid
+        if (currentHeld != null && gridHandler.validGhost)
+        {
+            Place();
+            return;
+        }
+
+        // if not placing, cast a ray from the camera for pickups or buttons
         Ray viewRay = new Ray(cameraTrans.position, cameraTrans.forward);
         bool didHit = Physics.Raycast(viewRay, out RaycastHit hitData, pickUpRange);
 
@@ -62,64 +67,58 @@ public class PlayerInteraction : MonoBehaviour
         {
             PressButton(hitData);
         }
-        // attempt place held object at ghost location
-        else
-        {
-            // todo: rework
-            // todo: query grid
-            // disregard viewray
-
-            // attempt place
-            /* else if (currentHeld != null && hitData.collider.CompareTag("PlaceSpace")
-            && hitData.collider.GetComponent<Chicken>().isActive)
-            {
-                Place(hitData);
-            }
-             */
-        }
     }
 
     private void Pickup(RaycastHit hitData)
     {
-        // todo: rework
-
         Debug.Log("Picking up item");
-        currentHeld = hitData.collider.gameObject.GetComponent<Pickup>();
+
+        // pick up chicken and deactivate it's collision box
+        currentHeld = hitData.collider.gameObject.GetComponent<Chicken>();
         currentHeld.gameObject.GetComponent<BoxCollider>().enabled = false;
 
+        // activate grid and call chicken's own pickup function
         gridHandler.Activate(true);
         currentHeld.PickUp();
 
-        // replace this with updating grid
-        //Chicken previousRoost = currentHeld.GetComponentInParent<Chicken>();
-        //if (previousRoost != null)
-        //    previousRoost.PickUp();
+        // set ghost chicken's rotation to mimic picked up chicken
+        gridHandler.ghostTrans.rotation = currentHeld.transform.rotation;
 
+        // set chicken's transform root to the player's hand
         currentHeld.transform.SetParent(handTransform);
-        currentHeld.transform.localPosition = Vector3.zero;
+        currentHeld.transform.localPosition = new Vector3(0, -0.5f, 0);
         currentHeld.transform.localEulerAngles = Vector3.zero;
+
+        // update grid
+        gridHandler.UpdateGrid();
     }
 
-    private void Place(RaycastHit hitData)
+    private void Place()
     {
-        // todo: rework
         Debug.Log("Placing item");
+        Transform targetTrans = gridHandler.ghostTrans;
         Transform heldTransform = currentHeld.transform;
 
-        heldTransform.SetParent(hitData.collider.gameObject.transform.Find("Roost Top"));
-        heldTransform.localPosition = Vector3.zero;
-        heldTransform.localEulerAngles = Vector3.zero;
+        // reset parent, copy ghost chicken's transform
+        heldTransform.SetParent(gridHandler.chickens.transform);
+        heldTransform.position = targetTrans.position;
+        heldTransform.localEulerAngles = targetTrans.eulerAngles;
+
+        // enable chicken's collider and call it's place
         currentHeld.gameObject.GetComponent<BoxCollider>().enabled = true;
         currentHeld.Place();
-        hitData.collider.GetComponent<Chicken>().Place();
         currentHeld = null;
 
+        // update grid
+        gridHandler.UpdateGrid();
+
+        // deactivate grid UI
         gridHandler.Activate(false);
     }
 
     private void PressButton(RaycastHit hitData)
     {
-        // if adding other buttons, check button type here
+        // note: if adding other buttons, check button type here
 
         Debug.Log("Pressing button");
         gameManager.StartButton();

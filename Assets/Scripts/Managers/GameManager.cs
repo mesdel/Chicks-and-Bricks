@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
         currScore = 0;
         instance = this;
 
+        // todo: possibly change
         // set pause key depending on editor/application
         pauseKey = KeyCode.Escape;
 #if UNITY_EDITOR
@@ -83,7 +84,6 @@ public class GameManager : MonoBehaviour
 
     public void ChickFails()
     {
-        // todo: failstate; pause game and prompt user to go to main menu or restart level
         gameOver = true;
         StopTime();
         UIManager.instance.GameOver();

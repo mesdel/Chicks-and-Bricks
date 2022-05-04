@@ -15,11 +15,12 @@ public abstract class Chicken : MonoBehaviour
     public void PickUp()
     {
         isActive = false;
+        transform.Find("Full Cell").gameObject.SetActive(false);
     }
 
     public void Place()
     {
-        Debug.Log("Placing");
+        Debug.Log("Placing Chicken");
         isActive = true;
     }
 

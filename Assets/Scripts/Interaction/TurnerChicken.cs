@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoostSpace : Chicken
+public class TurnerChicken : Chicken
 {
     [SerializeField]
     private bool preoccupied = false;

@@ -9,7 +9,6 @@ public class HazardMover : MonoBehaviour
     [SerializeField]
     private float lifetime;
 
-    // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("Despawn", 5.0f, 1.0f);
