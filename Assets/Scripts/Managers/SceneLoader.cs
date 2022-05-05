@@ -5,12 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    public static SceneLoader instance;
+
     private static int MAIN_MENU_INDEX = 0;
     private static int TUTORIAL_INDEX = 1;
 
     private void Awake()
     {
-        if(SceneManager.GetActiveScene().buildIndex == MAIN_MENU_INDEX)
+        instance = this;
+        if (SceneManager.GetActiveScene().buildIndex == MAIN_MENU_INDEX)
         {
             Cursor.lockState = CursorLockMode.None;
         }
@@ -34,6 +37,7 @@ public class SceneLoader : MonoBehaviour
     public void LoadMainMenu()
     {
         SceneManager.LoadScene(MAIN_MENU_INDEX);
+        Time.timeScale = 1;
     }
 
     public void ReloadScene()

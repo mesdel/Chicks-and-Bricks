@@ -4,16 +4,6 @@ using UnityEngine;
 
 public class TurnerChicken : Chicken
 {
-    [SerializeField]
-    private bool preoccupied = false;
-
-    private new void Awake()
-    {
-        base.Awake();
-        if (preoccupied)
-            Place();
-    }
-
     override public void ChickInteract(GameObject chick)
     {
         if(isActive)

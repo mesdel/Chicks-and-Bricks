@@ -92,8 +92,8 @@ public class GameManager : MonoBehaviour
     private void StopTime()
     {
         gamePaused = true;
-        Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0;
     }
 
     public void PauseGame()

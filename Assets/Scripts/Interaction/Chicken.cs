@@ -9,7 +9,7 @@ public abstract class Chicken : MonoBehaviour
 
     protected void Awake()
     {
-        isActive = false;
+        isActive = true;
     }
 
     public void PickUp()
