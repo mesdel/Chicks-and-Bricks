@@ -21,10 +21,17 @@ public class UIManager : MonoBehaviour
     private Slider sfxSlider;
     private Slider ambiSlider;
 
+    [SerializeField]
+    private AudioClip winSound;
+    [SerializeField]
+    private AudioClip loseSound;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
+        audioSource = GetComponent<AudioSource>();
         if(SceneLoader.IsMainMenu())
         {
             StartCoroutine(InitializeSliders());
@@ -119,11 +126,13 @@ public class UIManager : MonoBehaviour
     public void GameOver()
     {
         gameOverMenu.SetActive(true);
+        audioSource.PlayOneShot(loseSound);
     }
 
     public void GameWin()
     {
         winMenu.SetActive(true);
+        audioSource.PlayOneShot(winSound);
     }
 
     // when the slider is edited, save update to Settings struct

@@ -6,22 +6,26 @@ using UnityEngine;
 public abstract class Chicken : MonoBehaviour
 {
     public bool isActive { get; private set; }
+    protected ChickenEffects effects;
 
     protected void Awake()
     {
         isActive = true;
+        effects = GetComponent<ChickenEffects>();
     }
 
     public void PickUp()
     {
         isActive = false;
         transform.Find("Full Cell").gameObject.SetActive(false);
+        effects.Pickup();
     }
 
     public void Place()
     {
         Debug.Log("Placing Chicken");
         isActive = true;
+        effects.Place();
     }
 
     abstract public void ChickInteract(GameObject chick);

@@ -7,9 +7,16 @@ public class WorldButton : MonoBehaviour
     public bool isPressed {get; private set; }
     private float speed = 0.5f;
 
+    private AudioSource soundEffectPlayer;
+    [SerializeField]
+    private AudioClip pressSound;
+    [SerializeField]
+    private GameObject fireworkPrefab;
+
     void Awake()
     {
         isPressed = false;
+        soundEffectPlayer = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -26,5 +33,7 @@ public class WorldButton : MonoBehaviour
     {
         isPressed = true;
         transform.Find("Button Prompt").gameObject.SetActive(false);
+        soundEffectPlayer.PlayOneShot(pressSound);
+        Instantiate(fireworkPrefab, transform.position, transform.rotation);
     }
 }

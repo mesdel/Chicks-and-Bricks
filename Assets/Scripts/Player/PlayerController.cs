@@ -16,9 +16,6 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        // move below line to more applicable script
-        Application.targetFrameRate = 60;
-
         playerRb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
     }
