@@ -44,6 +44,11 @@ public class ChickenEffects : MonoBehaviour
             PlayBock();
     }
 
+    public void Play(AudioClip clip)
+    {
+        soundEffectPlayer.PlayOneShot(clip);
+    }
+
     public void Pickup()
     {
         onGrass = false;

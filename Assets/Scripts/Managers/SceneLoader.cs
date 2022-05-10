@@ -9,6 +9,8 @@ public class SceneLoader : MonoBehaviour
 
     private static int MAIN_MENU_INDEX = 0;
     private static int TUTORIAL_INDEX = 1;
+    private static int NUM_LEVELS = 2;
+    private static int LEVEL_OFFSET = 1;
 
     private void Awake()
     {
@@ -17,6 +19,11 @@ public class SceneLoader : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
         }
+    }
+
+    public int GetLevel()
+    {
+        return SceneManager.GetActiveScene().buildIndex - LEVEL_OFFSET;
     }
 
     public static bool IsMainMenu()
@@ -31,13 +38,14 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadLevel(int levelNum)
     {
-        SceneManager.LoadScene(levelNum);
+        SceneManager.LoadScene(levelNum + LEVEL_OFFSET);
     }
 
     public void LoadMainMenu()
     {
         SceneManager.LoadScene(MAIN_MENU_INDEX);
         Time.timeScale = 1;
+        StartCoroutine(UIManager.instance.InitializeLevelMenu());
     }
 
     public void ReloadScene()
@@ -52,5 +60,17 @@ public class SceneLoader : MonoBehaviour
         #endif
 
         Application.Quit();
+    }
+    public void NextLevel()
+    {
+        int currLevel = GetLevel();
+        if (currLevel == NUM_LEVELS)
+        {
+            LoadMainMenu();
+        }
+        else
+        {
+            LoadLevel(currLevel + 1);
+        }
     }
 }

@@ -11,7 +11,7 @@ public class DataSaver : MonoBehaviour
     public float sfxVolume;
     public float musicVolume;
     public float ambiVolume;
-    public float levelsCompleted;
+    public int levelsCompleted;
 
     public static bool isLoaded;
 
@@ -86,36 +86,42 @@ public class DataSaver : MonoBehaviour
         }
         else
         {
-            LoadDefault();
+            LoadDefaultSettings();
         }
     }
 
-    private void LoadDefault()
+    private void LoadDefaultSettings()
     {
         ambiVolume = musicVolume = sfxVolume = defaultVolume;
     }
 
     public void SaveProgress()
     {
-        // todo: save progress data
+        SaveData saveData = new SaveData
+        {
+            levelsCompleted = SceneLoader.instance.GetLevel()
+        };
+
+        string json = JsonUtility.ToJson(saveData);
+        File.WriteAllText(Application.persistentDataPath + "/saveData.json", json);
 
     }
 
     public void LoadProgress()
     {
-        // todo: load progress data
-
-        /* string path = Application.persistentDataPath + "/savefile.json";
+        string path = Application.persistentDataPath + "/saveData.json";
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
-            SaveData data = JsonUtility.FromJson<SaveData>(json);
+            SaveData saveData = JsonUtility.FromJson<SaveData>(json);
 
-            TeamColor = data.TeamColor;
+            levelsCompleted = saveData.levelsCompleted;
         }
         else
         {
-            // prog = 0
-         }*/
+            levelsCompleted = 0;
+        }
+
+        Debug.Log("Levels completed: " + levelsCompleted);
     }
 }

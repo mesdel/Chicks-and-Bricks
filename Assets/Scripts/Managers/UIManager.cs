@@ -27,6 +27,9 @@ public class UIManager : MonoBehaviour
     private AudioClip loseSound;
     private AudioSource audioSource;
 
+    [SerializeField]
+    private Transform levelMenu;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +38,7 @@ public class UIManager : MonoBehaviour
         if(SceneLoader.IsMainMenu())
         {
             StartCoroutine(InitializeSliders());
+            StartCoroutine(InitializeLevelMenu());
         }
         else
         {
@@ -85,7 +89,7 @@ public class UIManager : MonoBehaviour
             else if (name.Equals("Next Level Button"))
             {
                 // todo: next level button
-                // buttonFunction = SceneLoader.instance.NextLevel;
+                buttonFunction = SceneLoader.instance.NextLevel;
             }
             else
             {
@@ -111,6 +115,28 @@ public class UIManager : MonoBehaviour
         musicSlider.value = DataSaver.instance.musicVolume;
         sfxSlider.value = DataSaver.instance.sfxVolume;
         ambiSlider.value = DataSaver.instance.ambiVolume;
+    }
+
+    public IEnumerator InitializeLevelMenu()
+    {
+        yield return StartCoroutine(DataSaver.WaitForData());
+
+        Transform unlockableLevels = levelMenu.Find("Unlockable Levels");
+        int levelsToUnlock = DataSaver.instance.levelsCompleted;
+
+        // loop through unlockable levels and unlock them based on progress
+        foreach(Transform level in unlockableLevels)
+        {
+            if(levelsToUnlock > 0)
+            {
+                level.GetComponent<Button>().interactable = true;
+                levelsToUnlock--;
+            }
+            else
+            {
+                yield return null;
+            }
+        }
     }
 
     public void PauseGame()

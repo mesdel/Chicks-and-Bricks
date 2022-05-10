@@ -87,6 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c2a6d970082204ab45ab76ba77f8d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnSound: {fileID: 8300000, guid: 5114e7b0487db684c812c5ca40be7536, type: 3}
 --- !u!82 &5428370957738293022
 AudioSource:
   m_ObjectHideFlags: 0

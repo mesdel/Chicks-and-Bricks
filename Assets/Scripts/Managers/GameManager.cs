@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
             // todo: winstate; pause game and prompt user to go to main menu or next level
             StopTime();
             UIManager.instance.GameWin();
+            DataSaver.instance.SaveProgress();
         }
     }
 
