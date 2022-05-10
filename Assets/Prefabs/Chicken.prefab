@@ -67,6 +67,14 @@ MonoBehaviour:
   smokePrefab: {fileID: 2265132907764327976, guid: d5a514812f244244ebc72200adaf7cc0, type: 3}
   placeSound: {fileID: 8300000, guid: 324c0f003db50c946ac1fee02c74f782, type: 3}
   pickUpSound: {fileID: 8300000, guid: d2bdca082fbef3e4fb8bbed30f5d03d8, type: 3}
+  bockSounds:
+  - {fileID: 8300000, guid: 5dd77b48dd69591499cd6244aaec1dec, type: 3}
+  - {fileID: 8300000, guid: 1c7a7ec8a8964ce45b608200b5213573, type: 3}
+  - {fileID: 8300000, guid: a1d2d9343f3b3b54982adcbda55703a2, type: 3}
+  - {fileID: 8300000, guid: e536f25d3877fa64bba6306599be73d4, type: 3}
+  - {fileID: 8300000, guid: bbf7abfef5be60948aa4a40d4294d9f2, type: 3}
+  - {fileID: 8300000, guid: 8e5d44c31cdbe3141be93435a71831b2, type: 3}
+  - {fileID: 8300000, guid: 71f0f6e4659ca874e8c08a557ff6fafe, type: 3}
 --- !u!114 &406174497764580476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,7 +107,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 3
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -135,7 +143,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

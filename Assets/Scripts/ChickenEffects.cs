@@ -20,6 +20,9 @@ public class ChickenEffects : MonoBehaviour
     private AudioClip placeSound;
     [SerializeField]
     private AudioClip pickUpSound;
+    [SerializeField]
+    private AudioClip[] bockSounds;
+    private float bockChance = 0.005f;
 
     void Awake()
     {
@@ -36,6 +39,9 @@ public class ChickenEffects : MonoBehaviour
         // same with eating animation
         if (onGrass && Random.Range(0.0f, 1.0f) < eatChance)
             animator.SetTrigger("Eat");
+        // and with making random noises
+        if (Random.Range(0.0f, 1.0f) < bockChance)
+            PlayBock();
     }
 
     public void Pickup()
@@ -49,5 +55,11 @@ public class ChickenEffects : MonoBehaviour
         onGrass = true;
         Instantiate(smokePrefab, transform.position, transform.rotation);
         soundEffectPlayer.PlayOneShot(placeSound);
+    }
+
+    private void PlayBock()
+    {
+        int bockIndex = Random.Range(0, bockSounds.Length);
+        soundEffectPlayer.PlayOneShot(bockSounds[bockIndex]);
     }
 }
