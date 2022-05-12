@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         HandleKeyMovement();
-        UpdateAnimator();
     }
 
     private void HandleKeyMovement()
@@ -36,12 +35,9 @@ public class PlayerController : MonoBehaviour
         toMove = toMove.normalized * speed;
 
         playerRb.AddRelativeForce(toMove, ForceMode.Force);
-    }
 
-    private void UpdateAnimator()
-    {
-        
-        animator.SetFloat("velocity", playerRb.velocity.magnitude);
+        animator.SetFloat("verticalInput", verticalInput);
+        animator.SetFloat("horizontalInput", horizontalInput);
     }
 
     private void OnTriggerEnter(Collider other)
