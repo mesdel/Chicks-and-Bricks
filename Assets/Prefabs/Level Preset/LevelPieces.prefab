@@ -154,7 +154,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7043826675626167730}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 36c12f343f909d64b82ff71169e79ea7, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -436,9 +436,9 @@ GameObject:
   - component: {fileID: 7043826675972854595}
   - component: {fileID: 7043826675972854594}
   - component: {fileID: 7043826675972854593}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Game Border
-  m_TagString: Untagged
+  m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2268,6 +2268,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5745304873983923226, guid: 3254054eda057a34b8408252bf36a484, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5745304873983923229, guid: 3254054eda057a34b8408252bf36a484, type: 3}
       propertyPath: m_Name
       value: Hazard
@@ -2298,6 +2302,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7043826676372336927}
     m_Modifications:
+    - target: {fileID: 382999580876838859, guid: c47c61b400968984d99b8de438f1bf84, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 498616370449796409, guid: c47c61b400968984d99b8de438f1bf84, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1217116293884391726, guid: c47c61b400968984d99b8de438f1bf84, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2383586833942288320, guid: c47c61b400968984d99b8de438f1bf84, type: 3}
       propertyPath: chickens
       value: 
@@ -2349,6 +2365,10 @@ PrefabInstance:
     - target: {fileID: 2383586833942288323, guid: c47c61b400968984d99b8de438f1bf84, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2491772390437600846, guid: c47c61b400968984d99b8de438f1bf84, type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c47c61b400968984d99b8de438f1bf84, type: 3}
@@ -2419,6 +2439,14 @@ PrefabInstance:
     - target: {fileID: 736599282057797867, guid: 7d25a1e9266a6cd49b027aa4523caae2, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106259917885795902, guid: 7d25a1e9266a6cd49b027aa4523caae2, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3341189571983563630, guid: 7d25a1e9266a6cd49b027aa4523caae2, type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d25a1e9266a6cd49b027aa4523caae2, type: 3}
@@ -2512,6 +2540,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Warehouse
       objectReference: {fileID: 0}
+    - target: {fileID: 1686006487339004, guid: db905c506a032b048aca124f566d950e, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4995977089233354, guid: db905c506a032b048aca124f566d950e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2587,7 +2619,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7045123380653852710}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 36c12f343f909d64b82ff71169e79ea7, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -2604,6 +2636,10 @@ PrefabInstance:
     - target: {fileID: 1686006487339004, guid: db905c506a032b048aca124f566d950e, type: 3}
       propertyPath: m_Name
       value: Warehouse
+      objectReference: {fileID: 0}
+    - target: {fileID: 1686006487339004, guid: db905c506a032b048aca124f566d950e, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4995977089233354, guid: db905c506a032b048aca124f566d950e, type: 3}
       propertyPath: m_RootOrder
@@ -2680,7 +2716,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7045123380514419191}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 36c12f343f909d64b82ff71169e79ea7, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -2828,6 +2864,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1106259917885795902, guid: 7d25a1e9266a6cd49b027aa4523caae2, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3341189571983563630, guid: 7d25a1e9266a6cd49b027aa4523caae2, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d25a1e9266a6cd49b027aa4523caae2, type: 3}
 --- !u!4 &7780071909157445138 stripped
@@ -2889,6 +2933,14 @@ PrefabInstance:
     - target: {fileID: 736599280534455823, guid: 7d25a1e9266a6cd49b027aa4523caae2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106259917885795902, guid: 7d25a1e9266a6cd49b027aa4523caae2, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3341189571983563630, guid: 7d25a1e9266a6cd49b027aa4523caae2, type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d25a1e9266a6cd49b027aa4523caae2, type: 3}

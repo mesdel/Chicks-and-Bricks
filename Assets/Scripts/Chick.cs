@@ -14,13 +14,16 @@ public class Chick : MonoBehaviour
     private AudioSource audioSource;
 
     private bool toDelete;
+    private float lifeTime = 5.0f;
+    private Vector3 lastPosition;
 
-    Vector3 theVoid = new Vector3(0, -100.0f, 0);
+    private Vector3 theVoid = new Vector3(0, -100.0f, 0);
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         toDelete = false;
+        lastPosition = transform.position;
     }
 
     void FixedUpdate()
@@ -33,6 +36,29 @@ public class Chick : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        // chick perishes if stuck
+        StuckCheck();
+    }
+
+    private void ChickPerishes()
+    {
+        GameManager.instance.ChickFails();
+        Destroy(gameObject);
+    }
+
+    private void StuckCheck()
+    {
+        // reduce lifetime left unless the chick is still moving
+        float delta = (lastPosition - transform.position).magnitude;
+        if(delta < 0.01f)
+            lifeTime -= Time.deltaTime;
+        lastPosition = transform.position;
+        // if stuck for long enough, chick perishes
+        if (lifeTime < 0)
+        {
+            ChickPerishes();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -42,15 +68,14 @@ public class Chick : MonoBehaviour
         {
             GameManager.instance.ChickArrives();
             audioSource.PlayOneShot(arriveSound);
-            Instantiate(heartBlastPrefab, transform.position, transform.rotation);
+            Instantiate(heartBlastPrefab, transform.position + Vector3.up * 0.3f, transform.rotation);
             // delete after audio is finished playing
             toDelete = true;
             transform.position = theVoid;
         }
         else if (collision.gameObject.CompareTag("Hazard"))
         {
-            GameManager.instance.ChickFails();
-            Destroy(gameObject);
+            ChickPerishes();
         }
         else if(collision.gameObject.CompareTag("Tutorial"))
         {

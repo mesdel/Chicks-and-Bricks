@@ -47,13 +47,16 @@ public class Spawner : MonoBehaviour
 
     public void StartHazards()
     {
-        if (tutorialSpawner)
-            return;
         InvokeRepeating(nameof(SpawnHazards), 1.0f, 1.0f);
     }
 
     private void SpawnHazards()
     {
+        if(hazards == null)
+        {
+            Debug.Log("Spawner with no hazards");
+            return;
+        }
         for (int i = 0; i < hazards.transform.childCount; i++)
         {
             Transform spawnTransform = hazards.transform.GetChild(i).Find("Spawn Position");

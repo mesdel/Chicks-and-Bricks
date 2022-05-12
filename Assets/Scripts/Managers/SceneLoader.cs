@@ -43,9 +43,9 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene(MAIN_MENU_INDEX);
         Time.timeScale = 1;
         StartCoroutine(UIManager.instance.InitializeLevelMenu());
+        SceneManager.LoadScene(MAIN_MENU_INDEX);
     }
 
     public void ReloadScene()

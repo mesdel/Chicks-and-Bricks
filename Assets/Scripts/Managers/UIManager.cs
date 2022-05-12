@@ -30,6 +30,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Transform levelMenu;
 
+    private GameObject crosshair;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +44,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            crosshair = gameMenus.parent.Find("Crosshair").gameObject;
             InitMenus();
         }
     }
@@ -142,22 +145,26 @@ public class UIManager : MonoBehaviour
     public void PauseGame()
     {
         pauseMenu.SetActive(true);
+        crosshair.SetActive(false);
     }
 
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
+        crosshair.SetActive(true);
     }
 
     public void GameOver()
     {
         gameOverMenu.SetActive(true);
+        crosshair.SetActive(false);
         audioSource.PlayOneShot(loseSound);
     }
 
     public void GameWin()
     {
         winMenu.SetActive(true);
+        crosshair.SetActive(false);
         audioSource.PlayOneShot(winSound);
     }
 
