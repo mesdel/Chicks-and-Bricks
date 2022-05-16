@@ -91,4 +91,9 @@ public class Chick : MonoBehaviour
             other.gameObject.GetComponentInParent<Chicken>().ChickInteract(this.gameObject);
         }
     }
+
+    public void SpeedUp()
+    {
+        speed *= 4.0f;
+    }
 }

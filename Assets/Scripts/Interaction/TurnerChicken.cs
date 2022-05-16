@@ -5,7 +5,7 @@ using UnityEngine;
 public class TurnerChicken : Chicken
 {
     [SerializeField]
-    AudioClip turnSound;
+    private AudioClip turnSound;
     override public void ChickInteract(GameObject chick)
     {
         if(isActive)

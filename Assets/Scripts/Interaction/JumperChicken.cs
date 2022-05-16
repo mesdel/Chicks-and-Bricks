@@ -5,7 +5,7 @@ using UnityEngine;
 public class JumperChicken : Chicken
 {
     [SerializeField]
-    AudioClip jumpSound;
+    private AudioClip jumpSound;
     private float jumpForce = 20.0f;
 
     override public void ChickInteract(GameObject chick)
