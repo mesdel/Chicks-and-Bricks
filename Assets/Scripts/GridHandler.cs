@@ -59,8 +59,11 @@ public class GridHandler : MonoBehaviour
         oldChickenPos = new List<Vector3>();
         foreach (Transform cellT in chickens.transform)
         {
-            SetCell(cellT.position, true);
-            oldChickenPos.Add(cellT.transform.position);
+            if(cellT.gameObject.activeSelf)
+            {
+                SetCell(cellT.position, true);
+                oldChickenPos.Add(cellT.transform.position);
+            }
         }
     }
 

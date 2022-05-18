@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     private Slider musicSlider;
     private Slider sfxSlider;
     private Slider ambiSlider;
+    private Slider mouseSlider;
 
     [SerializeField]
     private AudioClip winSound;
@@ -39,7 +40,7 @@ public class UIManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         if(SceneLoader.IsMainMenu())
         {
-            StartCoroutine(InitializeSliders());
+            StartCoroutine(InitSettings());
             StartCoroutine(InitializeLevelMenu());
         }
         else
@@ -105,7 +106,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private IEnumerator InitializeSliders()
+    private IEnumerator InitSettings()
     {
         yield return StartCoroutine(DataSaver.WaitForData());
 
@@ -118,6 +119,12 @@ public class UIManager : MonoBehaviour
         musicSlider.value = DataSaver.instance.musicVolume;
         sfxSlider.value = DataSaver.instance.sfxVolume;
         ambiSlider.value = DataSaver.instance.ambiVolume;
+
+        mouseSlider = settingsMenu.Find("Mouse Sensitivity").Find("Slider").GetComponent<Slider>();
+        mouseSlider.value = DataSaver.instance.sensitivity;
+
+        Button saveButton = settingsMenu.Find("Save Button").GetComponent<Button>();
+        saveButton.onClick.AddListener(DataSaver.instance.SaveSettings);
     }
 
     public IEnumerator InitializeLevelMenu()
@@ -174,5 +181,10 @@ public class UIManager : MonoBehaviour
         DataSaver.instance.musicVolume = musicSlider.value;
         DataSaver.instance.sfxVolume = sfxSlider.value;
         DataSaver.instance.ambiVolume = ambiSlider.value;
+    }
+
+    public void SaveSensitivity()
+    {
+        DataSaver.instance.sensitivity = mouseSlider.value;
     }
 }

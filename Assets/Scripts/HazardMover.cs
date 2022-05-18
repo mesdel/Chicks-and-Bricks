@@ -23,4 +23,12 @@ public class HazardMover : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name.Equals("Game Border"))
+        {
+            Despawn();
+        }
+    }
 }

@@ -9,7 +9,7 @@ public class SceneLoader : MonoBehaviour
 
     private static int MAIN_MENU_INDEX = 0;
     private static int TUTORIAL_INDEX = 1;
-    private static int NUM_LEVELS = 2;
+    private static int NUM_LEVELS = 8;
     private static int LEVEL_OFFSET = 1;
 
     private void Awake()

@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField]
-    private float camSensitivityX;
-    [SerializeField]
-    private float camSensitivityY;
+    public float camSensitivity;
+    private const float sensitivityScale = 2.0f;
     private GameObject playerCam;
 
     private float xRotation;
@@ -20,6 +18,15 @@ public class CameraController : MonoBehaviour
         playerCam = GameObject.Find("Main Camera");
         xRotation = yRotation = 0;
         Cursor.lockState = CursorLockMode.Locked;
+        StartCoroutine(LoadSensitivity());
+    }
+
+    private IEnumerator LoadSensitivity()
+    {
+        yield return StartCoroutine(DataSaver.WaitForData());
+
+        camSensitivity = DataSaver.instance.sensitivity;
+        Debug.Log(camSensitivity);
     }
 
     void FixedUpdate()
@@ -27,8 +34,8 @@ public class CameraController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Mouse X");
         float verticalInput = Input.GetAxis("Mouse Y");
 
-        yRotation += horizontalInput * camSensitivityX;
-        xRotation -= verticalInput * camSensitivityY;
+        yRotation += horizontalInput * camSensitivity * sensitivityScale;
+        xRotation -= verticalInput * camSensitivity * sensitivityScale;
         xRotation = Mathf.Clamp(xRotation, xRotationMin, xRotationMax);
 
         transform.eulerAngles = new Vector3(0.0f, yRotation, 0.0f);
