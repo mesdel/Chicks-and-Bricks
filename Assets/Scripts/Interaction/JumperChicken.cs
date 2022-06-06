@@ -8,6 +8,12 @@ public class JumperChicken : Chicken
     private AudioClip jumpSound;
     private float jumpForce = 20.0f;
 
+    protected new void Awake()
+    {
+        base.Awake();
+        matIndex = 2;
+    }
+
     override public void ChickInteract(GameObject chick)
     {
         if(isActive)

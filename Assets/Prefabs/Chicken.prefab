@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 406174497764580476}
   - component: {fileID: 5428370957738293022}
   - component: {fileID: 2463537985683669165}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Chicken
   m_TagString: Pickupable
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ BoxCollider:
   m_GameObject: {fileID: 736599280534455818}
   m_Material: {fileID: 13400000, guid: 36c12f343f909d64b82ff71169e79ea7, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
@@ -750,7 +750,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7787235167794979636}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.030000001, z: 0}
+  m_LocalPosition: {x: 0, y: -0.030000001, z: -7.5}
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children:
   - {fileID: 7217004657018713425}

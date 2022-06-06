@@ -248,7 +248,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -395,7 +395,10 @@ MonoBehaviour:
   ghostTrans: {fileID: 0}
   chickens: {fileID: 0}
   fullCellPrefab: {fileID: 756387797022894711, guid: bbd447fa66510344ebc3d61862a7636d, type: 3}
-  defaultGhostMat: {fileID: 2100000, guid: a5be293636c1da74c896ef87ee3745a5, type: 2}
+  defaultGhostMats:
+  - {fileID: 2100000, guid: a5be293636c1da74c896ef87ee3745a5, type: 2}
+  - {fileID: 2100000, guid: 45a58249c66a8ea479cc28512ed4e9a8, type: 2}
+  - {fileID: 2100000, guid: 0136ad2bce2df894ebaa1c8bf8716a69, type: 2}
   redGhostMat: {fileID: 2100000, guid: 05bb17da47d722640913bca35b987adb, type: 2}
 --- !u!1 &2383586834645422259
 GameObject:
@@ -1285,7 +1288,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89

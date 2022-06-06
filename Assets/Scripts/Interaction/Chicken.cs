@@ -7,6 +7,7 @@ public abstract class Chicken : MonoBehaviour
 {
     public bool isActive { get; private set; }
     protected ChickenEffects effects;
+    public int matIndex { get; protected set; }
 
     protected void Awake()
     {

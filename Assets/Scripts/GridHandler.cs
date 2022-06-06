@@ -18,7 +18,7 @@ public class GridHandler : MonoBehaviour
     private int gridSize = 40;
 
     [SerializeField]
-    private Material defaultGhostMat;
+    private Material[] defaultGhostMats;
     [SerializeField]
     private Material redGhostMat;
     private SkinnedMeshRenderer ghostRenderer;
@@ -32,7 +32,7 @@ public class GridHandler : MonoBehaviour
         ghostTrans = transform.Find("Ghost Chicken");
         InitGrid();
         ghostRenderer = ghostTrans.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-        ghostRenderer.material = defaultGhostMat;
+        ghostRenderer.material = defaultGhostMats[0];
     }
 
     private void InitGrid()
@@ -111,7 +111,7 @@ public class GridHandler : MonoBehaviour
         return newPoint;
     }
 
-    public void ProjectGhost(float range, Transform cameraTrans)
+    public void ProjectGhost(float range, Transform cameraTrans, int matIndex)
     {
         Ray viewRay = new Ray(cameraTrans.position, cameraTrans.forward);
         bool didHit = Physics.Raycast(viewRay, out RaycastHit hitData, range);
@@ -137,7 +137,7 @@ public class GridHandler : MonoBehaviour
         }
         else // cell is empty
         {
-            ghostRenderer.material = defaultGhostMat;
+            ghostRenderer.material = defaultGhostMats[matIndex];
             validGhost = true;
         }
     }

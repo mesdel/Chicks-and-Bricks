@@ -37,7 +37,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.R))
                 gridHandler.RotateGhost();
-            gridHandler.ProjectGhost(placeRange, cameraTrans);
+            gridHandler.ProjectGhost(placeRange, cameraTrans, currentHeld.matIndex);
         }
     }
 
