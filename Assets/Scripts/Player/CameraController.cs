@@ -18,7 +18,10 @@ public class CameraController : MonoBehaviour
         playerCam = GameObject.Find("Main Camera");
         xRotation = yRotation = 0;
         Cursor.lockState = CursorLockMode.Locked;
-        StartCoroutine(LoadSensitivity());
+        if (DataSaver.instance != null)
+            StartCoroutine(LoadSensitivity());
+        else
+            camSensitivity = 0.5f;
     }
 
     private IEnumerator LoadSensitivity()

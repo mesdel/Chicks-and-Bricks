@@ -13,7 +13,7 @@ public class SoundFXVolumer : MonoBehaviour
 
     private void Update()
     {
-        if(currVolume != DataSaver.instance.sfxVolume)
+        if(DataSaver.instance != null && currVolume != DataSaver.instance.sfxVolume)
             StartCoroutine(LoadVolume());
     }
 

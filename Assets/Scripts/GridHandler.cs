@@ -103,8 +103,10 @@ public class GridHandler : MonoBehaviour
         Vector3 newPoint = new Vector3();
         newPoint.y = defaultGhostY;
 
-        newPoint.x = (int)(point.x) - offSet;
-        newPoint.z = (int)(point.z) - offSet;
+        newPoint.x = Mathf.FloorToInt(point.x) + offSet;
+        newPoint.z = Mathf.FloorToInt(point.z) + offSet;
+
+        Debug.Log("NP: " + newPoint + ", OP: " + point);
 
         return newPoint;
     }
@@ -114,8 +116,11 @@ public class GridHandler : MonoBehaviour
         Ray viewRay = new Ray(cameraTrans.position, cameraTrans.forward);
         bool didHit = Physics.Raycast(viewRay, out RaycastHit hitData, range);
 
+        Debug.DrawRay(cameraTrans.position, cameraTrans.forward * range * 100, Color.red);
+
         if (didHit)
         {
+            Debug.Log("did hit");
             ghostTrans.position = GridSnap(hitData.point);
         }
         else

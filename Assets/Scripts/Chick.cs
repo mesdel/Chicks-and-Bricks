@@ -79,7 +79,11 @@ public class Chick : MonoBehaviour
         }
         else if(collision.gameObject.CompareTag("Tutorial"))
         {
-            Destroy(gameObject);
+            audioSource.PlayOneShot(arriveSound, 0.2f);
+            Instantiate(heartBlastPrefab, transform.position + Vector3.up * 0.3f, transform.rotation);
+            // delete after audio is finished playing
+            toDelete = true;
+            transform.position = theVoid;
         }
     }
 
