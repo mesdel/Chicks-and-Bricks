@@ -120,6 +120,12 @@ public class UIManager : MonoBehaviour
         sfxSlider.value = DataSaver.instance.sfxVolume;
         ambiSlider.value = DataSaver.instance.ambiVolume;
 
+        musicSlider.onValueChanged.AddListener(delegate { BGPlayer.instance.AdjustVolume(); });
+        ambiSlider.onValueChanged.AddListener(delegate { BGPlayer.instance.AdjustVolume(); });
+        musicSlider.onValueChanged.AddListener(delegate { SaveVolumes(); });
+        ambiSlider.onValueChanged.AddListener(delegate { SaveVolumes(); });
+        sfxSlider.onValueChanged.AddListener(delegate { SaveVolumes(); });
+
         mouseSlider = settingsMenu.Find("Mouse Sensitivity").Find("Slider").GetComponent<Slider>();
         mouseSlider.value = DataSaver.instance.sensitivity;
 

@@ -8,10 +8,6 @@ public class BGPlayer : MonoBehaviour
     public static BGPlayer instance { get; private set; }
 
     private AudioSource[] audioSources;
-    [SerializeField]
-    private Slider musicSlider;
-    [SerializeField]
-    private Slider ambiSlider;
 
     // todo: remove singleton/dontdestroy status
     // and instead use different music/ambiance from main menu
@@ -44,7 +40,7 @@ public class BGPlayer : MonoBehaviour
 
     public void AdjustVolume()
     {
-        audioSources[0].volume = musicSlider.value;
-        audioSources[1].volume = ambiSlider.value;
+        audioSources[0].volume = DataSaver.instance.musicVolume;
+        audioSources[1].volume = DataSaver.instance.ambiVolume;
     }
 }
