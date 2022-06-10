@@ -13,6 +13,8 @@ public class Chick : MonoBehaviour
     private AudioClip arriveSound;
     private AudioSource audioSource;
 
+    private Animator animator;
+
     private bool toDelete;
     private float lifeTime = 5.0f;
     private Vector3 lastPosition;
@@ -21,6 +23,7 @@ public class Chick : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         audioSource = GetComponent<AudioSource>();
         toDelete = false;
         lastPosition = transform.position;
@@ -92,7 +95,16 @@ public class Chick : MonoBehaviour
         Debug.Log("Chick Trigger Enter");
         if(other.gameObject.CompareTag("ChickenTrigger"))
         {
-            other.gameObject.GetComponentInParent<Chicken>().ChickInteract(this.gameObject);
+            Chicken chicken = other.gameObject.GetComponentInParent<Chicken>();
+            chicken.ChickInteract(this.gameObject);
+            if(chicken.GetType() == typeof(RunnerChicken))
+            {
+                animator.SetBool("Run", true);
+            }
+            else if(chicken.GetType() == typeof(JumperChicken))
+            {
+                animator.SetTrigger("Jump");
+            }
         }
     }
 
