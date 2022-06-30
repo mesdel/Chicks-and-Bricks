@@ -120,6 +120,7 @@ public class DataSaver : MonoBehaviour
         string path = Application.persistentDataPath + "/saveData.json";
         if (File.Exists(path))
         {
+            Debug.Log(path);
             string json = File.ReadAllText(path);
             SaveData saveData = JsonUtility.FromJson<SaveData>(json);
 
