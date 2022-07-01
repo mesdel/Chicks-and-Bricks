@@ -38,10 +38,11 @@ public class GameManager : MonoBehaviour
         
         scoreText.text = currScore + "/" + numChicks + " chicks";
         spawners = gameObject.GetComponents<Spawner>();
+        /* deprecated
         foreach(Spawner spawner in spawners)
         {
             spawner.StartHazards();
-        }
+        } */
     }
 
     private void Update()

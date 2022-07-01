@@ -101,7 +101,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2689175811736455106}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7764075720352124668}
@@ -7100,7 +7100,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7043826675077947315}
     m_Modifications:
+    - target: {fileID: 452968349996221656, guid: 3254054eda057a34b8408252bf36a484, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 727411694503126765, guid: 3254054eda057a34b8408252bf36a484, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3040997705118357628, guid: 3254054eda057a34b8408252bf36a484, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
@@ -7363,7 +7371,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7043826675077947315}
     m_Modifications:
+    - target: {fileID: 452968349996221656, guid: 3254054eda057a34b8408252bf36a484, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 727411694503126765, guid: 3254054eda057a34b8408252bf36a484, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3040997705118357628, guid: 3254054eda057a34b8408252bf36a484, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
@@ -7631,7 +7647,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7043826675077947315}
     m_Modifications:
+    - target: {fileID: 452968349996221656, guid: 3254054eda057a34b8408252bf36a484, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 727411694503126765, guid: 3254054eda057a34b8408252bf36a484, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3040997705118357628, guid: 3254054eda057a34b8408252bf36a484, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}

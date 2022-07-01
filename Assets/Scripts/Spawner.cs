@@ -9,10 +9,10 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private GameObject chickPrefab;
 
-    [SerializeField]
-    private GameObject hazards;
-    [SerializeField]
-    private GameObject hazardPrefab;
+    //[SerializeField]
+    //private GameObject hazards;
+    //[SerializeField]
+    //private GameObject hazardPrefab;
 
     private float chickSpawnPeriod = 3.0f;
     [SerializeField]
@@ -45,11 +45,13 @@ public class Spawner : MonoBehaviour
         } while (tutorialSpawner);
     }
 
+    /* deprecated
     public void StartHazards()
     {
         InvokeRepeating(nameof(SpawnHazards), 1.0f, 1.0f);
     }
 
+    
     private void SpawnHazards()
     {
         if(hazards == null)
@@ -62,7 +64,7 @@ public class Spawner : MonoBehaviour
             Transform spawnTransform = hazards.transform.GetChild(i).Find("Spawn Position");
             SpawnChild(spawnTransform, hazardPrefab);
         }
-    }
+    } */
 
     // todo: object pooling for hazard projectiles
 
