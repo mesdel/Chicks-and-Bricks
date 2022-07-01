@@ -6516,6 +6516,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 432073444}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
+        m_MethodName: set_value
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.5
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1480623605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8877,6 +8889,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1104929715}
     m_Modifications:
+    - target: {fileID: 607839711120094971, guid: 6a0c89726220d6e47956e6ef7d134c9d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 640022538800043443, guid: 6a0c89726220d6e47956e6ef7d134c9d, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -9038,6 +9054,7 @@ PrefabInstance:
     - {fileID: 1786255290693036905, guid: 6a0c89726220d6e47956e6ef7d134c9d, type: 3}
     - {fileID: 5667397299395031239, guid: 6a0c89726220d6e47956e6ef7d134c9d, type: 3}
     - {fileID: 2111888428824552782, guid: 6a0c89726220d6e47956e6ef7d134c9d, type: 3}
+    - {fileID: 607839711120094971, guid: 6a0c89726220d6e47956e6ef7d134c9d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6a0c89726220d6e47956e6ef7d134c9d, type: 3}
 --- !u!1 &2085755740
 GameObject:
