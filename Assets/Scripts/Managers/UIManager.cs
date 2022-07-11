@@ -193,4 +193,9 @@ public class UIManager : MonoBehaviour
     {
         DataSaver.instance.sensitivity = mouseSlider.value;
     }
+
+    public void OpenURL(string url)
+    {
+        Application.OpenURL(url);
+    }
 }
